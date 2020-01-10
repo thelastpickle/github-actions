@@ -1,0 +1,33 @@
+
+name: 'TLP Reaper CCM'
+description: 'Environment to run TLP Reaper ITs using CCM'
+inputs:
+  test-type:
+    description: 'the class of the test'
+    required: false
+    default: 'ccm'
+  cassandra-version:
+    description: 'Cassandra version to use in the test'
+    required: true
+    default: '3.11.5'
+  storage-type:
+    description: 'Storage backed the Reaper will use'
+    required: true
+    default: 'local'
+  grim-min:
+    description: ''
+    required: false
+    default: '1'
+  grim-max:
+    description: ''
+    required: false
+    default: '1'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.test-type }}
+    - ${{ inputs.cassandra-version }}
+    - ${{ inputs.storage-type }}
+    - ${{ inputs.grim-min }}
+    - ${{ inputs.grim-max }}
